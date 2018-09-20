@@ -4,6 +4,7 @@
       {{ user.email }}
       <button v-if="user" @click="handleSignOut">Sign Out</button>
     </div>
+    <resources-list v-if="user" />
     <navigation :isUserAuth="user ? true: false"/>
     <router-view/>
   </div>
@@ -12,14 +13,16 @@
 <script>
 import { auth } from "./helpers/firebase.service.js";
 import Navigation from "@/components/Navigation.vue";
+import ResourcesList from "@/components/ResourcesList.vue";
 export default {
   computed: {
     user() {
-      return this.$store.state.user;
+      return auth.currentUser;
     }
   },
   components: {
-    Navigation
+    Navigation,
+    ResourcesList
   },
   methods: {
     handleSignOut: function() {
