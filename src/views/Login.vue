@@ -29,10 +29,8 @@ export default {
   methods: {
     handleLogIn: function() {
       auth.signInWithEmailAndPassword(this.userEmail, this.userPassword).then(
-        user => {
-          console.log("Loged in", user);
+        () => {
           this.$router.replace("/");
-          this.$store.commit("setLogedInUser", user.user);
         },
         error => {
           console.log("error loggin in", error);
